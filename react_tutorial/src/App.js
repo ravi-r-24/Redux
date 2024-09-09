@@ -4,6 +4,7 @@ import ContextComponent from "./components/contextComp";
 // import { useState } from "react";
 import { ThemeContextProvider } from "./context/theme.js";
 import Container from "./components/body.js";
+import Todo from "./TodoApp/Todo.js";
 
 function App() {
   // const [isLight, setIsLight] = useState(true);
@@ -13,10 +14,20 @@ function App() {
         <ContextComponent />
       </ThemeTypeContext.Provider> */}
 
-      <ThemeContextProvider>
+      {/* <ThemeContextProvider>
         <ContextComponent />
         <Container />
-      </ThemeContextProvider>
+      </ThemeContextProvider> */}
+      <div
+        style={{
+          border: "1px solid black",
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "#202A44",
+        }}
+      >
+        <Todo />
+      </div>
     </>
   );
 }
