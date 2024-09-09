@@ -5,6 +5,7 @@ import ContextComponent from "./components/contextComp";
 import { ThemeContextProvider } from "./context/theme.js";
 import Container from "./components/body.js";
 import Todo from "./TodoApp/Todo.js";
+import Tutorial from "./tutorial/Tutorial.js";
 
 function App() {
   // const [isLight, setIsLight] = useState(true);
@@ -18,7 +19,7 @@ function App() {
         <ContextComponent />
         <Container />
       </ThemeContextProvider> */}
-      <div
+      {/* <div
         style={{
           border: "1px solid black",
           width: "100vw",
@@ -27,7 +28,8 @@ function App() {
         }}
       >
         <Todo />
-      </div>
+      </div> */}
+      <Tutorial />
     </>
   );
 }
