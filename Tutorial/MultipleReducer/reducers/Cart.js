@@ -33,6 +33,26 @@ export const cartReducer = (state = initialState, action) => {
         ),
         message: "Item removed from cart successfully",
       };
+    case "INCREASE_ADDED_ITEM_QUANTITY": {
+      let targetItem = state.data.find(
+        (item) => item.productId === action.payload.productId
+      );
+
+      const targetItemIndex = state.data.findIndex(
+        (item) => item.productId === action.payload.productId
+      );
+
+      const itemWithUpdatedQuantity = {
+        ...targetItem,
+        quantity: targetItem.quantity + 1,
+      };
+
+      state.data.splice(targetItemIndex, 1, itemWithUpdatedQuantity);
+      return {
+        ...state,
+        data: [...state.data],
+      };
+    }
     default:
       return state;
   }

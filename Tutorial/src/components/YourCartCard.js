@@ -3,7 +3,10 @@ import { useDispatch } from "react-redux";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
-import { removeItemFromCart } from "../../MultipleReducer/actions/Cart.js";
+import {
+  removeItemFromCart,
+  increaseAddedItemQuantity,
+} from "../../MultipleReducer/actions/Cart.js";
 
 const YourCartCard = ({
   id,
@@ -50,13 +53,18 @@ const YourCartCard = ({
                 <span className="px-3 text-xl text-slate-950 font-semibold font-nunito-sans">
                   {quantity}
                 </span>
-                <button className="font-bold bg-slate-900 p-2 text-white text-xl rounded-r-md">
+                <button
+                  className="font-bold bg-slate-900 p-2 text-white text-xl rounded-r-md"
+                  onClick={() => dispatch(increaseAddedItemQuantity(id))}
+                >
                   <IoMdAdd />
                 </button>
               </div>
               <button
                 className="text-red-500 text-2xl"
-                onClick={() => dispatch(removeItemFromCart(id))}
+                onClick={() => {
+                  dispatch(removeItemFromCart(id));
+                }}
               >
                 <RiDeleteBinFill />
               </button>
