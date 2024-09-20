@@ -6,29 +6,33 @@ const initialState = {
 };
 
 export const cartReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case "ADD_TO_CART":
       // check if the item already exists
       const itemExist = state.data.find(
         (item) => item.productId === action.payload.productId
       );
-      console.log(itemExist);
       if (itemExist) {
         return {
           ...state,
-          message: "Item already exists",
+          message: "Item already exists in cart! Please check your cart to buy",
           alreadyExist: true,
         };
       }
       return {
         ...state,
         data: [...state.data, payload],
-        message: "Item added successfully",
+        message: "Item added to cart successfully",
         alreadyExist: false,
       };
-    case "REMOVE_FROM_CART":
-      return state.filter((product) => product.id !== action.payload.productId);
+    case "REMOVE_ITEM_FROM_CART":
+      return {
+        ...state,
+        data: state.data.filter(
+          (item) => item.productId !== action.payload.productId
+        ),
+        message: "Item removed from cart successfully",
+      };
     default:
       return state;
   }
