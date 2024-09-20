@@ -1,9 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
+import { removeItemFromCart } from "../../MultipleReducer/actions/Cart.js";
 
 const YourCartCard = ({
+  id,
   image,
   quantity = 10000,
   title,
@@ -11,6 +14,7 @@ const YourCartCard = ({
   price,
   category,
 }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <div className=" grid grid-cols-12 h-64 my-4 rounded-md shadow-md border">
@@ -50,7 +54,10 @@ const YourCartCard = ({
                   <IoMdAdd />
                 </button>
               </div>
-              <button className="text-red-500 text-2xl">
+              <button
+                className="text-red-500 text-2xl"
+                onClick={() => dispatch(removeItemFromCart(id))}
+              >
                 <RiDeleteBinFill />
               </button>
             </div>
