@@ -51,6 +51,7 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         data: [...state.data],
+        message: "Quantity of item updated successfully",
       };
     }
     case "DECREASE_ADDED_ITEM_QUANTITY": {
