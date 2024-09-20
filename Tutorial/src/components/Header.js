@@ -1,15 +1,16 @@
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
+import logo from "../Images/logo.png";
 
-const Header = ({ data, messagePopUpHeight }) => {
+const Header = ({ data }) => {
   return (
     <div
-      className={`flex sticky top-${messagePopUpHeight} bg-white items-center justify-between h-24 z-10 px-8`}
+      className={`flex sticky bg-white items-center justify-between h-24 z-10 px-8`}
     >
       {/* Title */}
       <div className="font-semibold text-slate-800 text-2xl">
-        Shopping Center
+        <img src={logo} alt="Logo" className="h-12 w-auto" />
       </div>
 
       {/* Search Bar */}

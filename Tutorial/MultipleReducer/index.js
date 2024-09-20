@@ -1,5 +1,10 @@
 import { combineReducers } from "redux";
-import { productsReducer, cartReducer, wishListReducer } from "./reducers";
+import {
+  productsReducer,
+  cartReducer,
+  wishListReducer,
+  userActionTypeReducer,
+} from "./reducers";
 import { createStore } from "redux";
 import {
   addProductAction,
@@ -13,6 +18,7 @@ const reducer = combineReducers({
   products: productsReducer,
   cartItems: cartReducer,
   wishList: wishListReducer,
+  userAction: userActionTypeReducer,
 });
 
 // Create store

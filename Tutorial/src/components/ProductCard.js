@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCartAction } from "../../MultipleReducer/actions/Cart.js";
 import { addToWishListAction } from "../../MultipleReducer/actions/WishList.js";
+import { userActionTypeSelector } from "../../MultipleReducer/actions/UserActionTypeSelector.js";
 import { GrFavorite } from "react-icons/gr";
 import { MdOutlineFavorite } from "react-icons/md";
 
@@ -12,9 +13,11 @@ const ProductCard = ({
   price,
   image,
   wishListItem,
-  messageTypeSetter,
+  addedToWishList,
 }) => {
   const dispatch = useDispatch();
+
+  console.log(wishListItem);
 
   return (
     <div className="w-72 border border-slate-200 rounded-md mr-8 mb-12 shadow-lg cursor-pointer hover:shadow-2xl h-fit relative">
@@ -35,7 +38,7 @@ const ProductCard = ({
                 : "text-green-500"
             }`}
           >
-            {rate} *
+            {rate}
           </div>
           <div className="text-blue-400 font-semibold">$ {price}</div>
         </div>
@@ -44,7 +47,7 @@ const ProductCard = ({
             className="bg-slate-900 px-4 py-2 text-white text-sm rounded-md font-semibold"
             onClick={() => {
               dispatch(addToCartAction(id, 3));
-              messageTypeSetter("Cart");
+              dispatch(userActionTypeSelector("Cart"));
             }}
           >
             Add to Cart
@@ -56,9 +59,9 @@ const ProductCard = ({
       </div>
       <div
         className={`absolute top-2 right-2`}
-        onClick={async () => {
-          await dispatch(addToWishListAction(id));
-          messageTypeSetter("WishList");
+        onClick={() => {
+          dispatch(addToWishListAction(id));
+          dispatch(userActionTypeSelector("WishList"));
         }}
       >
         {wishListItem ? (

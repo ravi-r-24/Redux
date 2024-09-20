@@ -1,63 +1,61 @@
 import React from "react";
-import ProductCard from "./components/ProductCard.js";
-import "./index.css";
-import Header from "./components/Header.js";
+import { Header, MessagePopUp, ProductCard, YourCart } from "./components";
 import { useSelector } from "react-redux";
-import MessagePopUp from "./components/MessagePopUp.js";
 import { useState, useEffect } from "react";
+import { CgFontSpacing } from "react-icons/cg";
+import "./index.css";
 
 const App = () => {
   const products = useSelector((state) => state.products);
   const cartItems = useSelector((state) => state.cartItems);
   const wishList = useSelector((state) => state.wishList);
+  const userAction = useSelector((state) => state.userAction);
 
-  const [showPopUp, setShowPopUp] = useState();
-  const [messagePopUpHeight, setMessagePopUpHeight] = useState(0);
-  const [cartMessage, setCartMessage] = useState(cartItems.message);
+  const [cartItemMessage, setCartItemMessage] = useState(cartItems.message);
   const [wishListMessage, setWishListMessage] = useState(wishList.message);
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState("");
+  const [showMessagePopUp, setShowMessagePopUp] = useState(false);
+  const [itemAlreadyExistsAlert, setItemAlreadyExistsAlert] = useState(false);
 
-  console.log(cartMessage);
-  console.log(wishListMessage);
-
-  const wishListData = wishList.data;
-
-  useEffect(() => setShowPopUp(true), [cartItems.data, cartItems.message]);
   useEffect(() => {
-    setMessage(message);
-  });
+    setCartItemMessage(cartItems.message);
+    setWishListMessage(wishList.message);
+    setMessage(wishList.message);
+    userAction.type === "Cart"
+      ? setMessage(cartItems.message)
+      : userAction.type === "WishList"
+      ? setWishListMessage(wishList.message)
+      : "";
 
-  const messageTypeSetter = (messageType) => {
-    console.log(message);
-    switch (messageType) {
-      case "Cart": {
-        setMessage(cartItems.message);
-        break;
-      }
-      case "WishList": {
-        setMessage(wishList.message);
-        break;
-      }
-    }
-  };
+    (cartItems.message || wishList.message) !== ""
+      ? setShowMessagePopUp(true)
+      : setShowMessagePopUp(false);
+
+    userAction.type === "Cart"
+      ? setItemAlreadyExistsAlert(cartItems.alreadyExist)
+      : userAction.type === "WishList"
+      ? setItemAlreadyExistsAlert(wishList.alreadyExist)
+      : setItemAlreadyExistsAlert(false);
+  }, [cartItems, wishList, userAction]);
+
+  console.log(products);
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-center">
-        {cartMessage || wishListMessage ? (
-          <MessagePopUp
-            alreadyExist={cartItems.alreadyExist}
-            message={message}
-            showPopUp={showPopUp}
-            setShowPopUp={setShowPopUp}
-            setMessagePopUpHeight={setMessagePopUpHeight}
-          />
-        ) : (
-          ""
-        )}
+      <div
+        className={`items-center justify-center ${
+          showMessagePopUp ? "flex" : "hidden"
+        }`}
+      >
+        <MessagePopUp
+          message={message}
+          setShowMessagePopUp={setShowMessagePopUp}
+          itemAlreadyExistsAlert={itemAlreadyExistsAlert}
+          showMessagePopUp={showMessagePopUp}
+        />
       </div>
 
-      <Header data={cartItems.data} messagePopUpHeight={messagePopUpHeight} />
+      <Header data={cartItems.data} />
       <div className="flex flex-wrap px-8">
         {products.map((product) => {
           return (
@@ -68,14 +66,27 @@ const App = () => {
               rate={product.rating?.rate}
               price={product.price}
               image={product.image}
-              wishListItem={wishListData.some(
-                (wishList) => wishList.productId === product.id
+              cartItemMessage={cartItemMessage}
+              wishListMessage={wishListMessage}
+              wishListItem={wishList.data.some(
+                (item) => item.productId === product.id
               )}
-              messageTypeSetter={messageTypeSetter}
+              setMessage={setMessage}
+              addedToWishList={wishList.success}
             />
           );
         })}
       </div>
+      {
+        // TODO: Use some proper method for this logic
+        cartItems.data.length > 0 && (
+          <YourCart
+            items={products.filter((product) =>
+              cartItems.data.some((item) => item.productId === product.id)
+            )}
+          />
+        )
+      }
     </div>
   );
 };
