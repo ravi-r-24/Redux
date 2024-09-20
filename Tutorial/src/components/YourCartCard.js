@@ -6,6 +6,7 @@ import { RiSubtractFill } from "react-icons/ri";
 import {
   removeItemFromCart,
   increaseAddedItemQuantity,
+  decreaseAddedItemQuantity,
 } from "../../MultipleReducer/actions/Cart.js";
 
 const YourCartCard = ({
@@ -47,7 +48,10 @@ const YourCartCard = ({
           <div className="w-3/12 px-4 pt-6 pb-2 relative">
             <div className="flex items-center justify-between border-b border-slate-500 pb-3 border-dashed">
               <div className="flex items-center border border-slate-900 rounded-lg">
-                <button className="font-bold rounded-l-md bg-slate-900 p-2 text-white text-xl">
+                <button
+                  className="font-bold rounded-l-md bg-slate-900 p-2 text-white text-xl"
+                  onClick={() => dispatch(decreaseAddedItemQuantity(id))}
+                >
                   <RiSubtractFill />
                 </button>
                 <span className="px-3 text-xl text-slate-950 font-semibold font-nunito-sans">

@@ -18,3 +18,9 @@ export const increaseAddedItemQuantity = (productId) =>
     (type = "INCREASE_ADDED_ITEM_QUANTITY"),
     (payload = { productId: productId })
   );
+
+export const decreaseAddedItemQuantity = (productId) =>
+  actionCreator(
+    (type = "DECREASE_ADDED_ITEM_QUANTITY"),
+    (payload = { productId: productId })
+  );

@@ -53,6 +53,31 @@ export const cartReducer = (state = initialState, action) => {
         data: [...state.data],
       };
     }
+    case "DECREASE_ADDED_ITEM_QUANTITY": {
+      // TODO: Code repetition taken place
+      let targetItem = state.data.find(
+        (item) => item.productId === action.payload.productId
+      );
+
+      const targetItemIndex = state.data.findIndex(
+        (item) => item.productId === action.payload.productId
+      );
+
+      const itemWithUpdatedQuantity = {
+        ...targetItem,
+        quantity:
+          targetItem.quantity > 0
+            ? targetItem.quantity - 1
+            : targetItem.quantity,
+      };
+
+      state.data.splice(targetItemIndex, 1, itemWithUpdatedQuantity);
+      return {
+        ...state,
+        data: [...state.data],
+        message: "Quantity of item updated successfully",
+      };
+    }
     default:
       return state;
   }
