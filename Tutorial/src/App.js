@@ -81,6 +81,7 @@ const App = () => {
             items={products.filter((product) =>
               cartItems.data.some((item) => item.productId === product.id)
             )}
+            cartItemsData={cartItems.data}
           />
         )
       }

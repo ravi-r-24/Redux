@@ -2,7 +2,7 @@ import React from "react";
 import YourCartCard from "./YourCartCard";
 import { FaSearch } from "react-icons/fa";
 
-const YourCart = ({ items }) => {
+const YourCart = ({ items, cartItemsData }) => {
   return (
     <div>
       <div className="flex w-full items-center justify-between px-8">
@@ -23,6 +23,10 @@ const YourCart = ({ items }) => {
           <YourCartCard
             key={item.id}
             id={item.id}
+            quantity={
+              cartItemsData.find((cartItem) => cartItem.productId === item.id)
+                ?.quantity
+            }
             title={item.title}
             description={item.description}
             image={item.image}

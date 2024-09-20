@@ -8,7 +8,7 @@ import { removeItemFromCart } from "../../MultipleReducer/actions/Cart.js";
 const YourCartCard = ({
   id,
   image,
-  quantity = 10000,
+  quantity = 1,
   title,
   description,
   price,
@@ -70,7 +70,7 @@ const YourCartCard = ({
             </div>
 
             <div className="flex justify-end font-semibold font-nunito-sans pb-3 border-b pt-1 text-slate-500 border-dashed">
-              Quantity: <span className="ml-1 text-slate-900">85</span>
+              Quantity: <span className="ml-1 text-slate-900">{quantity}</span>
             </div>
 
             <div className="flex justify-between font-semibold font-nunito-sans text-lg py-2">
