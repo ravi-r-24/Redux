@@ -2,7 +2,6 @@ import React from "react";
 import { Header, MessagePopUp, ProductCard, YourCart } from "./components";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { CgFontSpacing } from "react-icons/cg";
 import "./index.css";
 
 const App = () => {
@@ -37,8 +36,6 @@ const App = () => {
       ? setItemAlreadyExistsAlert(wishList.alreadyExist)
       : setItemAlreadyExistsAlert(false);
   }, [cartItems, wishList, userAction]);
-
-  console.log(products);
 
   return (
     <div className="w-full">
