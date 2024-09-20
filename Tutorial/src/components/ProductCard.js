@@ -17,8 +17,6 @@ const ProductCard = ({
 }) => {
   const dispatch = useDispatch();
 
-  console.log(wishListItem);
-
   return (
     <div className="w-72 border border-slate-200 rounded-md mr-8 mb-12 shadow-lg cursor-pointer hover:shadow-2xl h-fit relative">
       <div className="px-2 py-3">

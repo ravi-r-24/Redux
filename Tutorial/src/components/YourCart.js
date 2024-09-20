@@ -3,7 +3,6 @@ import YourCartCard from "./YourCartCard";
 import { FaSearch } from "react-icons/fa";
 
 const YourCart = ({ items }) => {
-  console.log(items);
   return (
     <div>
       <div className="flex w-full items-center justify-between px-8">
@@ -23,6 +22,7 @@ const YourCart = ({ items }) => {
         {items.map((item) => (
           <YourCartCard
             key={item.id}
+            id={item.id}
             title={item.title}
             description={item.description}
             image={item.image}

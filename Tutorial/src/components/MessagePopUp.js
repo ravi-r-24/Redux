@@ -9,7 +9,6 @@ const MessagePopUp = ({
   showMessagePopUp,
 }) => {
   useEffect(() => {
-    console.log("MessagePopUp", showMessagePopUp);
     if (message) {
       const timer = setTimeout(() => setShowMessagePopUp(false), 5000);
 
